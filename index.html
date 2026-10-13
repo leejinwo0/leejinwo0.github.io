@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+  <!-- 문자 인코딩: 한글이 깨지지 않게 UTF-8 사용 -->
+  <meta charset="utf-8">
+  <!-- 모바일에서 화면 폭에 맞게 보이도록 설정 -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- 브라우저 탭 제목 / 검색·링크 미리보기에 쓰이는 정보 -->
+  <title>이진우 | LEE JINWOO</title>
+  <meta name="description" content="이진우 프로필 — 학력, 병역, 경력, 프로젝트, 활동, 수상, 자격증">
+
+  <!-- 웹폰트(구글 폰트): 한글은 IBM Plex Sans KR, 숫자·영문은 Manrope -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=Manrope:wght@600;700&display=swap">
+
+  <!-- 직접 만든 스타일 파일 -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- 전체 레이아웃: 왼쪽 사이드바 + 오른쪽 본문 -->
+  <div class="layout">
+
+    <!-- ===================== 사이드바 (메뉴) ===================== -->
+    <aside class="sidebar">
+      <nav class="nav" aria-label="섹션 메뉴">
+        <span class="nav-label">PROFILE</span>
+        <!-- href="#아이디" 를 누르면 같은 아이디의 섹션으로 스크롤됩니다 -->
+        <!-- 오른쪽 숫자(count)는 섹션 안 항목 개수 -->
+        <a href="#education" class="nav-link"><span class="nav-text">학력</span><span class="count">2</span></a>
+        <a href="#military" class="nav-link"><span class="nav-text">병역</span><span class="count">1</span></a>
+        <a href="#career" class="nav-link"><span class="nav-text">경력</span><span class="count">1</span></a>
+        <a href="#projects" class="nav-link"><span class="nav-text">프로젝트</span><span class="count">3</span></a>
+        <a href="#activity" class="nav-link"><span class="nav-text">활동</span><span class="count">6</span></a>
+        <a href="#awards" class="nav-link"><span class="nav-text">수상</span><span class="count">4</span></a>
+        <a href="#certs" class="nav-link"><span class="nav-text">자격증</span><span class="count">8</span></a>
+      </nav>
+    </aside>
+
+    <!-- ===================== 본문 ===================== -->
+    <main class="main">
+
+      <!-- 헤더: 이름 + 오른쪽 아이콘 버튼(이메일, GitHub)
+           아이콘 그림은 icons 폴더의 파일을 불러옵니다 -->
+      <header class="header">
+        <h1>이진우 <span class="name-en">LEE JINWOO</span></h1>
+        <div class="header-actions">
+          <!-- 누르면 링크로 이동하지 않고, 가운데 팝업에 주소를 보여줍니다
+               data-title = 팝업 제목, data-value = 팝업에 보여줄 주소 -->
+          <button type="button" class="btn-icon js-popup" aria-label="이메일" data-title="이메일" data-value="leejinwo0@naver.com">
+            <img src="icons/mail.svg" alt="" width="18" height="18">
+          </button>
+          <button type="button" class="btn-icon js-popup" aria-label="GitHub" data-title="GitHub" data-value="https://github.com/leejinwo0">
+            <img src="icons/github.svg" alt="" width="18" height="18">
+          </button>
+        </div>
+      </header>
+
+      <!--
+        모든 섹션은 같은 구조입니다.
+        <section class="card">  카드 한 장
+          <h2> 섹션 제목
+          <ul class="list">       항목 목록
+            <li class="row">      항목 한 줄
+              .chip      맨 앞: 구분 칩 (졸업, 근무 중, 팀 프로젝트, 대상 …)
+              .row-main  가운데: 이름(.row-name) + 설명(.row-desc)
+              .row-side  오른쪽: (문서 버튼) + 기간(.date)
+        항목은 모두 최신순(시작일 기준)으로 위에서 아래로 작성합니다.
+        기간 표기: 시작 – 끝 (진행 중이면 "시작 –")
+      -->
+
+      <!-- ===== 학력 ===== -->
+      <section id="education" class="card">
+        <h2>학력</h2>
+        <ul class="list">
+          <li class="row"><span class="chip">졸업</span>
+            <div class="row-main">
+              <p class="row-name">홍익대학교 소프트웨어융합학과</p>
+              <p class="row-desc">학사 · 학점 4.07 / 4.5</p>
+            </div>
+            <div class="row-side"><span class="date">2020.03.02 – 2026.02.20</span></div>
+          </li>
+          <li class="row"><span class="chip">졸업</span>
+            <div class="row-main">
+              <p class="row-name">금정고등학교</p>
+              <p class="row-desc">자율형 공립고 · 자연계열</p>
+            </div>
+            <div class="row-side"><span class="date">2017.03.02 – 2020.02.14</span></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 병역 ===== -->
+      <section id="military" class="card">
+        <h2>병역</h2>
+        <ul class="list">
+          <li class="row"><span class="chip">만기 전역</span>
+            <div class="row-main">
+              <p class="row-name">해병대 · 통신정비병</p>
+              <p class="row-desc">병장 만기 전역</p>
+            </div>
+            <div class="row-side"><span class="date">2021.04.26 – 2022.10.25</span></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 경력 ===== -->
+      <section id="career" class="card">
+        <h2>경력</h2>
+        <ul class="list">
+          <li class="row"><span class="chip">근무 중</span>
+            <div class="row-main">
+              <p class="row-name">서울시 디지털도시국 공간정보과</p>
+              <p class="row-desc">AI활용 공간정보구축사업 매력일자리 · 웹맵서비스개발(프로그래밍)</p>
+            </div>
+            <div class="row-side"><span class="date">2026.04.01 –</span></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 프로젝트 =====
+           문서 버튼: 누르면 PDF 미리보기 팝업이 열립니다.
+             data-title  = 팝업 제목
+             data-folder = PDF가 들어 있는 폴더
+             data-docs   = 있는 문서만 쉼표로 (plan=수행계획서, report=결과보고서, design=화면설계서, summary=프로젝트정리) -->
+      <section id="projects" class="card">
+        <h2>프로젝트</h2>
+        <ul class="list">
+          <li class="row"><span class="chip">실무 프로젝트</span>
+            <div class="row-main">
+              <p class="row-name">3·1운동 스토리맵</p>
+              <p class="row-desc">스마트 서울맵 API를 활용한 웹맵페이지</p>
+            </div>
+            <div class="row-side">
+              <button type="button" class="doc-btn js-docs" data-title="3·1운동 스토리맵" data-folder="docs/march-first-storymap" data-docs="plan,report,design,summary">문서</button>
+              <span class="date">2026.06.18 –</span>
+            </div>
+          </li>
+          <li class="row"><span class="chip">팀 프로젝트</span>
+            <div class="row-main">
+              <p class="row-name">곰곰소방단 — VR 화재 대피 훈련</p>
+              <p class="row-desc">VR 화재 대피 훈련 시뮬레이션</p>
+            </div>
+            <div class="row-side">
+              <button type="button" class="doc-btn js-docs" data-title="곰곰소방단 — VR 화재 대피 훈련" data-folder="docs/vr-fire-evacuation" data-docs="summary">문서</button>
+              <span class="date">2025.07.21 – 2025.08.01</span>
+            </div>
+          </li>
+          <li class="row"><span class="chip">팀 프로젝트</span>
+            <div class="row-main">
+              <p class="row-name">세종 GPT — 역사위인특화 AI 챗봇</p>
+              <p class="row-desc">종합설계(1) RAG 챗봇 · 종합설계(2) EXAONE 파인튜닝</p>
+            </div>
+            <div class="row-side">
+              <button type="button" class="doc-btn js-docs" data-title="세종 GPT — 역사위인특화 AI 챗봇" data-folder="docs/sejong-gpt" data-docs="summary">문서</button>
+              <div class="dates">
+                <span class="date">2025.03.03 – 2025.06.13</span><br>
+                <span class="date">2025.09.01 – 2025.11.09</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 활동 (칩 = 활동 구분) ===== -->
+      <section id="activity" class="card">
+        <h2>활동</h2>
+        <ul class="list">
+          <li class="row"><span class="chip">교육</span>
+            <div class="row-main">
+              <p class="row-name">OpenCV Zoo 기반의 머신러닝 · 딥러닝 영상분석 실무 프로젝트</p>
+              <p class="row-desc">기획발전특구 수요맞춤형 지원사업 신규인력 양성과정</p>
+            </div>
+            <div class="row-side"><span class="date">2025.09.01 – 2025.09.25</span></div>
+          </li>
+          <li class="row"><span class="chip">일경험</span>
+            <div class="row-main">
+              <p class="row-name">(주)위니드소프트 · 미래내일일경험 프로젝트형</p>
+              <p class="row-desc">VR 화재현장 감식 플랫폼</p>
+            </div>
+            <div class="row-side"><span class="date">2025.08.11 – 2025.10.05</span></div>
+          </li>
+          <li class="row"><span class="chip">일경험</span>
+            <div class="row-main">
+              <p class="row-name">(주)위니드소프트 · 미래내일일경험 프로젝트형</p>
+              <p class="row-desc">VR 화재현장 감식 플랫폼</p>
+            </div>
+            <div class="row-side"><span class="date">2025.06.02 – 2025.07.25</span></div>
+          </li>
+          <li class="row"><span class="chip">산학연계</span>
+            <div class="row-main">
+              <p class="row-name">SW융합클러스터2.0 산학연계 뉴노멀 프로젝트</p>
+              <p class="row-desc">산학연계 프로젝트</p>
+            </div>
+            <div class="row-side"><span class="date">2025.03.01 – 2025.11.30</span></div>
+          </li>
+          <li class="row"><span class="chip">교육</span>
+            <div class="row-main">
+              <p class="row-name">메타버스 융합 SW 아카데미 3기</p>
+              <p class="row-desc">웹프로그래밍</p>
+            </div>
+            <div class="row-side"><span class="date">2024.06.29 – 2024.12.07</span></div>
+          </li>
+          <li class="row"><span class="chip">교육</span>
+            <div class="row-main">
+              <p class="row-name">메타버스 융합 SW 아카데미 2기</p>
+              <p class="row-desc">웹프로그래밍</p>
+            </div>
+            <div class="row-side"><span class="date">2024.01.03 – 2024.06.16</span></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 수상 (칩 = 상 등급, .row-desc = 부문 · 주최 기관) ===== -->
+      <section id="awards" class="card">
+        <h2>수상</h2>
+        <ul class="list">
+          <li class="row"><span class="chip">장려상</span>
+            <div class="row-main">
+              <p class="row-name">DX FESTA STORY LAB</p>
+              <p class="row-desc">고려대학교 세종산학협력단 · 홍익대학교 세종캠퍼스 산학협력단</p>
+            </div>
+            <div class="row-side"><span class="date">2025.11.20</span></div>
+          </li>
+          <li class="row"><span class="chip">장려상</span>
+            <div class="row-main">
+              <p class="row-name">2025년도 지역혁신 인재양성 연합 페스티발</p>
+              <p class="row-desc">공모전 · 데이터 분석 및 보안 부문 · 한국정보통신보안윤리학회</p>
+            </div>
+            <div class="row-side"><span class="date">2025.11.14</span></div>
+          </li>
+          <li class="row"><span class="chip">우수상</span>
+            <div class="row-main">
+              <p class="row-name">OpenCV Zoo 기반의 머신러닝 · 딥러닝 영상분석 실무 팀 프로젝트</p>
+              <p class="row-desc">홍익대학교 산학협력단</p>
+            </div>
+            <div class="row-side"><span class="date">2025.09.25</span></div>
+          </li>
+          <li class="row"><span class="chip">대상</span>
+            <div class="row-main">
+              <p class="row-name">세종 DX해커톤</p>
+              <p class="row-desc">공모전 · AI활용 콘텐츠 부문 · 세종특별시</p>
+            </div>
+            <div class="row-side"><span class="date">2025.08.02</span></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== 자격증 (칩 = 자격 종류, .row-desc = 발급 기관, 그룹별 취득일 최신순)
+           국가기술 = 국가기술자격, 국가공인 = 국가공인 민간자격 ===== -->
+      <section id="certs" class="card">
+        <h2>자격증</h2>
+
+        <!-- IT 자격증 -->
+        <p class="sub-title">IT</p>
+        <ul class="list">
+          <li class="row"><span class="chip">국가기술</span>
+            <div class="row-main">
+              <p class="row-name">정보처리기사</p>
+              <p class="row-desc">한국산업인력공단</p>
+            </div>
+            <div class="row-side"><span class="date">2026.09.11</span></div>
+          </li>
+          <li class="row"><span class="chip">국가공인</span>
+            <div class="row-main">
+              <p class="row-name">리눅스마스터 2급</p>
+              <p class="row-desc">한국정보통신진흥협회(KAIT)</p>
+            </div>
+            <div class="row-side"><span class="date">2026.04.03</span></div>
+          </li>
+          <li class="row"><span class="chip">국가공인</span>
+            <div class="row-main">
+              <p class="row-name">SQLD</p>
+              <p class="row-desc">한국데이터산업진흥원</p>
+            </div>
+            <div class="row-side"><span class="date">2024.12.13</span></div>
+          </li>
+          <li class="row"><span class="chip">국가공인</span>
+            <div class="row-main">
+              <p class="row-name">네트워크관리사 2급</p>
+              <p class="row-desc">한국정보통신자격협회(ICQA)</p>
+            </div>
+            <div class="row-side"><span class="date">2024.10.08</span></div>
+          </li>
+          <li class="row"><span class="chip">국가기술</span>
+            <div class="row-main">
+              <p class="row-name">프로그래밍기능사 (구 정보처리기능사)</p>
+              <p class="row-desc">한국산업인력공단</p>
+            </div>
+            <div class="row-side"><span class="date">2014.02.27</span></div>
+          </li>
+          <li class="row"><span class="chip">국가기술</span>
+            <div class="row-main">
+              <p class="row-name">컴퓨터활용능력 2급</p>
+              <p class="row-desc">대한상공회의소</p>
+            </div>
+            <div class="row-side"><span class="date">2013.06.21</span></div>
+          </li>
+        </ul>
+
+        <!-- 기타 (IT 외 자격 · 면허) -->
+        <p class="sub-title">기타</p>
+        <ul class="list">
+          <li class="row"><span class="chip">국가자격</span>
+            <div class="row-main">
+              <p class="row-name">한국사능력검정 3급</p>
+              <p class="row-desc">국사편찬위원회</p>
+            </div>
+            <div class="row-side"><span class="date">2026.02.20</span></div>
+          </li>
+          <li class="row"><span class="chip">면허</span>
+            <div class="row-main">
+              <p class="row-name">운전면허 2종보통</p>
+              <p class="row-desc">경찰청</p>
+            </div>
+            <div class="row-side"><span class="date">2022.11.18</span></div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- 맨 아래 저작권 표시 (연도는 script.js가 자동으로 넣음) -->
+      <footer class="footer">© <span id="year"></span> LEE JIN WOO</footer>
+    </main>
+  </div>
+
+  <!-- ===================== 주소 팝업 =====================
+       <dialog>는 브라우저 기본 팝업 요소입니다.
+       script.js가 제목·주소를 채워 넣고 화면 가운데에 띄웁니다. -->
+  <dialog id="popup" class="popup">
+    <div class="popup-inner">
+      <p class="popup-title" id="popup-title"></p>
+      <p class="popup-value" id="popup-value"></p>
+      <div class="popup-actions">
+        <button type="button" class="popup-btn" id="popup-copy">복사</button>
+        <button type="button" class="popup-btn popup-btn-dark" id="popup-close">닫기</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ===================== 문서 미리보기 팝업 =====================
+       script.js가 제목 · 탭 · PDF 주소를 채워 넣습니다. -->
+  <dialog id="doc-popup" class="doc-popup">
+    <div class="doc-head">
+      <p class="doc-title" id="doc-title"></p>
+      <button type="button" class="popup-btn popup-btn-dark doc-close" id="doc-close">닫기</button>
+    </div>
+    <!-- 문서 탭 (문서가 2개 이상일 때만 보임) -->
+    <div class="doc-tabs" id="doc-tabs"></div>
+    <!-- PDF가 표시되는 창 -->
+    <iframe class="doc-frame" id="doc-frame" title="문서 미리보기"></iframe>
+    <!-- 휴대폰 등 미리보기가 안 될 때 쓰는 링크 -->
+    <a class="doc-open" id="doc-open" href="#" target="_blank" rel="noopener">새 탭에서 크게 보기</a>
+  </dialog>
+
+  <!-- 동작 스크립트 (맨 마지막에 불러와야 위의 요소를 찾을 수 있음) -->
+  <script src="script.js"></script>
+</body>
+
+</html>
