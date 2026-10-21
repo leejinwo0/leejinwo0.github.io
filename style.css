@@ -3,25 +3,26 @@
    여기 값만 바꾸면 사이트 전체에 적용됩니다.
    ========================================================= */
 :root {
-   --bg: #E9E7E2;
-   /* 페이지 배경 (웜그레이) */
-   --card: #FFFFFF;
-   /* 카드 배경 */
-   --soft: #F3F2EF;
-   /* 칩 · 숫자 · 버튼 배경 */
-   --line: #F0EEE9;
-   /* 목록 구분선 */
-   --ink: #121212;
-   /* 기본 글자색 · 선택된 메뉴 */
-   --muted: #6E6E68;
-   /* 보조 글자색 (설명, 라벨) */
-   --badge-text: #3A3A38;
-   /* 칩 · 날짜 글자색 */
-   --radius: 18px;
-   /* 카드 모서리 둥글기 */
-   --font: 'IBM Plex Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-   --font-num: 'Manrope', 'IBM Plex Sans KR', sans-serif;
-   /* 날짜 · 영문 */
+    --bg: #E9E7E2;
+    /* 페이지 배경 (웜그레이) */
+    --card: #FFFFFF;
+    /* 카드 배경 */
+    --soft: #F3F2EF;
+    /* 칩 · 숫자 · 버튼 배경 */
+    --line: #F0EEE9;
+    /* 목록 구분선 */
+    --ink: #121212;
+    /* 기본 글자색 · 선택된 메뉴 */
+    --muted: #6E6E68;
+    /* 보조 글자색 (설명, 라벨) */
+    --badge-text: #3A3A38;
+    /* 칩 · 날짜 글자색 */
+    --radius: 18px;
+    /* 카드 모서리 둥글기 */
+    --font: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    /* 본문 글꼴 (나눔고딕) */
+    --font-num: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    /* 날짜 · 영문 글꼴 */
 }
 
 /* =========================================================
@@ -29,58 +30,58 @@
    ========================================================= */
 /* 패딩을 크기에 포함 */
 * {
-   box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 /* 메뉴 클릭 시 부드럽게 이동 */
 html {
-   scroll-behavior: smooth;
-   scroll-padding-top: 20px;
+    scroll-behavior: smooth;
+    scroll-padding-top: 20px;
 }
 
 body {
-   margin: 0;
-   background: var(--bg);
-   color: var(--ink);
-   font-family: var(--font);
-   line-height: 1.5;
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.5;
 }
 
 p, h1, h2 {
-   margin: 0;
+    margin: 0;
 }
 
 /* 링크 밑줄 · 파란색 제거 */
 a {
-   color: inherit;
-   text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
 
 /* 목록 점 제거 */
 ul {
-   list-style: none;
-   margin: 0;
-   padding: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 /* =========================================================
    3. 레이아웃: 사이드바 + 본문 가로 배치
    ========================================================= */
 .layout {
-   max-width: 1400px;
-   margin: 0 auto;
-   padding: 20px;
-   display: flex;
-   align-items: flex-start;
-   gap: 16px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
 }
 
 .main {
-   flex: 1;
-   min-width: 0;
-   display: flex;
-   flex-direction: column;
-   gap: 14px;
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
 }
 
 /* =========================================================
@@ -88,404 +89,420 @@ ul {
    ========================================================= */
 /* sticky: 스크롤해도 따라옴 */
 .sidebar {
-   flex: 0 0 260px;
-   position: sticky;
-   top: 20px;
-   background: var(--card);
-   border-radius: var(--radius);
-   padding: 16px;
+    flex: 0 0 260px;
+    position: sticky;
+    top: 20px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 16px;
 }
 
 .nav {
-   display: flex;
-   flex-direction: column;
-   gap: 2px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
 }
 
 .nav-label {
-   font-size: 11px;
-   font-weight: 600;
-   color: var(--muted);
-   letter-spacing: 0.08em;
-   padding: 6px 10px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    padding: 6px 10px;
 }
 
 .nav-link {
-   display: flex;
-   align-items: center;
-   gap: 10px;
-   min-height: 40px;
-   padding: 0 12px;
-   border-radius: 10px;
-   font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 40px;
+    padding: 0 12px;
+    border-radius: 10px;
+    font-size: 14px;
 }
 
 .nav-link:hover {
-   background: var(--soft);
+    background: var(--soft);
 }
 
 /* 현재 보고 있는 섹션 (script.js가 붙임) */
 .nav-link.active {
-   background: var(--ink);
-   color: #FFFFFF;
-   font-weight: 600;
+    background: var(--ink);
+    color: #FFFFFF;
+    font-weight: 600;
 }
 
 .nav-text {
-   flex: 1;
-   min-width: 0;
-   overflow: hidden;
-   text-overflow: ellipsis;
-   white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 메뉴 영어 이름: 한글 옆에 작고 연하게 */
+.nav-en {
+    margin-left: 4px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* 선택된 메뉴(검정 배경)에서는 영어도 밝게 */
+.nav-link.active .nav-en {
+    color: #BDBBB5;
 }
 
 .count {
-   font-size: 12px;
-   background: var(--soft);
-   color: var(--ink);
-   padding: 2px 8px;
-   border-radius: 999px;
+    font-size: 12px;
+    background: var(--soft);
+    color: var(--ink);
+    padding: 2px 8px;
+    border-radius: 999px;
 }
 
 /* =========================================================
    5. 헤더: 이름 + 아이콘 버튼
    ========================================================= */
 .header {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   align-items: center;
-   gap: 12px;
-   padding: 6px 4px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 6px 4px;
 }
 
 .header h1 {
-   font-size: 26px;
-   font-weight: 700;
-   letter-spacing: -0.02em;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
 }
 
 .name-en {
-   font-family: var(--font-num);
-   font-weight: 600;
-   color: var(--muted);
-   font-size: 18px;
+    font-family: var(--font-num);
+    font-weight: 600;
+    color: var(--muted);
+    font-size: 18px;
 }
 
 .header-actions {
-   display: flex;
-   gap: 8px;
+    display: flex;
+    gap: 8px;
 }
 
 /* 동그란 흰 버튼 */
 .btn-icon {
-   border: 0;
-   cursor: pointer;
-   width: 44px;
-   height: 44px;
-   display: inline-flex;
-   align-items: center;
-   justify-content: center;
-   background: var(--card);
-   border-radius: 50%;
+    border: 0;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card);
+    border-radius: 50%;
 }
 
 .btn-icon:hover {
-   background: var(--soft);
+    background: var(--soft);
 }
 
 /* =========================================================
    6. 카드(섹션)와 목록 한 줄
    ========================================================= */
 .card {
-   background: var(--card);
-   border-radius: var(--radius);
-   padding: 22px;
+    background: var(--card);
+    border-radius: var(--radius);
+    padding: 22px;
 }
 
 .card h2 {
-   font-size: 16px;
-   font-weight: 700;
-   padding-bottom: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    padding-bottom: 8px;
 }
 
 /* 카드 안 작은 소제목 (자격증 > IT · 기타) */
 .sub-title {
-   font-size: 12px;
-   font-weight: 600;
-   color: var(--muted);
-   padding: 16px 0 4px;
-   margin-top: 4px;
-   border-top: 1px solid var(--line);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 16px 0 4px;
+    margin-top: 4px;
+    border-top: 1px solid var(--line);
 }
 
 /* 제목 바로 다음의 첫 소제목은 구분선 없음 */
 .card h2+.sub-title {
-   border-top: 0;
-   padding-top: 0;
-   margin-top: 0;
+    border-top: 0;
+    padding-top: 0;
+    margin-top: 0;
 }
 
 /* 목록 한 줄: 칩 + 내용 + 오른쪽 기간 */
 .row {
-   display: flex;
-   flex-wrap: wrap;
-   align-items: center;
-   gap: 8px 14px;
-   padding: 13px 0;
-   border-bottom: 1px solid var(--line);
-   min-height: 52px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+    min-height: 52px;
 }
 
 /* 마지막 줄 구분선 없애기 */
 .list .row:last-child {
-   border-bottom: 0;
+    border-bottom: 0;
 }
 
 .row-main {
-   flex: 1 1 260px;
-   min-width: 0;
-   display: flex;
-   flex-direction: column;
-   gap: 3px;
+    flex: 1 1 260px;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
 }
 
 .row-name {
-   font-size: 14px;
-   font-weight: 600;
+    font-size: 14px;
+    font-weight: 600;
 }
 
 .row-desc {
-   font-size: 12px;
-   color: var(--muted);
+    font-size: 12px;
+    color: var(--muted);
 }
 
 /* 오른쪽 끝으로 밀기 (문서 버튼 + 기간을 가로로) */
 .row-side {
-   margin-left: auto;
-   display: flex;
-   align-items: center;
-   gap: 10px;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
 /* 구분 칩 (졸업 · 근무 중 · 팀 프로젝트 · 대상 등)
    항목 맨 앞에 오고, 모든 섹션에서 같은 크기 · 같은 색 */
 .chip {
-   flex: 0 0 88px;
-   text-align: center;
-   padding: 5px 0;
-   border-radius: 6px;
-   font-size: 12px;
-   font-weight: 600;
-   background: var(--soft);
-   color: var(--badge-text);
-   white-space: nowrap;
+    flex: 0 0 88px;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--soft);
+    color: var(--badge-text);
+    white-space: nowrap;
 }
 
 /* 기간 · 날짜
    tabular-nums: 숫자 폭을 똑같이 맞춰서 줄마다 길이가 들쭉날쭉하지 않게
    min-width + 왼쪽 정렬: 날짜가 한 세로줄에서 시작하도록 */
 .date {
-   display: inline-block;
-   min-width: 172px;
-   text-align: left;
-   font-family: var(--font-num);
-   font-size: 12px;
-   font-weight: 600;
-   font-variant-numeric: tabular-nums;
-   color: var(--badge-text);
-   white-space: nowrap;
+    display: inline-block;
+    min-width: 172px;
+    text-align: left;
+    font-family: var(--font-num);
+    font-size: 12px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--badge-text);
+    white-space: nowrap;
 }
 
-/* 프로젝트 문서 버튼 (날짜 왼쪽) */
+/* 기간이 여러 개일 때 위아래로 쌓기 */
+.dates {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+/* 문서 · 상장 · 확인서 버튼 (날짜 왼쪽)
+   min-width: 버튼 글자 길이가 달라도 폭을 같게 → 날짜가 한 세로줄에 맞춰짐 */
 .doc-btn {
-   min-height: 28px;
-   padding: 0 12px;
-   border: 1px solid #DEDCD6;
-   border-radius: 999px;
-   background: var(--card);
-   color: var(--ink);
-   font-family: inherit;
-   font-size: 12px;
-   font-weight: 600;
-   cursor: pointer;
+    min-width: 64px;
+    min-height: 28px;
+    padding: 0 12px;
+    border: 1px solid #DEDCD6;
+    border-radius: 999px;
+    background: var(--card);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .doc-btn:hover {
-   background: var(--soft);
+    background: var(--soft);
 }
 
 /* =========================================================
    7. 주소 팝업 (<dialog>)
    ========================================================= */
 .popup {
-   width: min(360px, calc(100% - 32px));
-   border: 0;
-   border-radius: var(--radius);
-   padding: 0;
-   background: var(--card);
-   color: var(--ink);
-   font-family: var(--font);
-   box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
+    width: min(360px, calc(100% - 32px));
+    border: 0;
+    border-radius: var(--radius);
+    padding: 0;
+    background: var(--card);
+    color: var(--ink);
+    font-family: var(--font);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
 }
 
 /* 안쪽 여백 (바깥 클릭 판정과 분리) */
 .popup-inner {
-   padding: 24px;
+    padding: 24px;
 }
 
 /* 팝업 뒤 어두운 배경 */
 .popup::backdrop {
-   background: rgba(18, 18, 18, .35);
+    background: rgba(18, 18, 18, .35);
 }
 
 .popup-title {
-   font-size: 13px;
-   font-weight: 600;
-   color: var(--muted);
-   margin-bottom: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+    margin-bottom: 8px;
 }
 
 /* 클릭하면 주소 전체 선택 */
 .popup-value {
-   font-family: var(--font-num);
-   font-size: 16px;
-   font-weight: 700;
-   padding: 14px;
-   background: var(--soft);
-   border-radius: 10px;
-   word-break: break-all;
-   user-select: all;
+    font-family: var(--font-num);
+    font-size: 16px;
+    font-weight: 700;
+    padding: 14px;
+    background: var(--soft);
+    border-radius: 10px;
+    word-break: break-all;
+    user-select: all;
 }
 
 .popup-actions {
-   display: flex;
-   gap: 8px;
-   margin-top: 16px;
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
 }
 
 .popup-btn {
-   flex: 1;
-   min-height: 44px;
-   border: 0;
-   border-radius: 999px;
-   background: var(--soft);
-   color: var(--ink);
-   font-family: inherit;
-   font-size: 14px;
-   font-weight: 600;
-   cursor: pointer;
+    flex: 1;
+    min-height: 44px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--soft);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 .popup-btn-dark {
-   background: var(--ink);
-   color: #FFFFFF;
+    background: var(--ink);
+    color: #FFFFFF;
 }
 
 /* =========================================================
    8. 문서 미리보기 팝업 (<dialog>)
    ========================================================= */
 .doc-popup {
-   width: min(960px, calc(100% - 32px));
-   height: min(88vh, 900px);
-   border: 0;
-   border-radius: var(--radius);
-   padding: 0;
-   background: var(--card);
-   color: var(--ink);
-   font-family: var(--font);
-   box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
+    width: min(960px, calc(100% - 32px));
+    height: min(88vh, 900px);
+    border: 0;
+    border-radius: var(--radius);
+    padding: 0;
+    background: var(--card);
+    color: var(--ink);
+    font-family: var(--font);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, .18);
 }
 
 /* 열렸을 때만 세로 배치 (닫혀 있을 땐 숨김 유지) */
 .doc-popup[open] {
-   display: flex;
-   flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .doc-popup::backdrop {
-   background: rgba(18, 18, 18, .35);
+    background: rgba(18, 18, 18, .35);
 }
 
 /* 위쪽: 제목 + 닫기 */
 .doc-head {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   gap: 12px;
-   padding: 16px 20px 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 20px 12px;
 }
 
 .doc-title {
-   font-size: 15px;
-   font-weight: 700;
+    font-size: 15px;
+    font-weight: 700;
 }
 
 .doc-close {
-   flex: 0 0 auto;
-   padding: 0 18px;
+    flex: 0 0 auto;
+    padding: 0 18px;
 }
 
 /* 문서 탭 줄 */
 .doc-tabs {
-   display: flex;
-   gap: 6px;
-   padding: 0 20px 12px;
-   overflow-x: auto;
-}
-
-/* 문서가 1개일 때 탭 줄 숨김 */
-.doc-tabs[hidden] {
-   display: none;
+    display: flex;
+    gap: 6px;
+    padding: 0 20px 12px;
+    overflow-x: auto;
 }
 
 .doc-tab {
-   flex: 0 0 auto;
-   min-height: 36px;
-   padding: 0 14px;
-   border: 0;
-   border-radius: 999px;
-   background: var(--soft);
-   color: var(--ink);
-   font-family: inherit;
-   font-size: 13px;
-   font-weight: 600;
-   cursor: pointer;
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding: 0 14px;
+    border: 0;
+    border-radius: 999px;
+    background: var(--soft);
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
 }
 
 /* 지금 보고 있는 문서 탭 */
 .doc-tab.active {
-   background: var(--ink);
-   color: #FFFFFF;
+    background: var(--ink);
+    color: #FFFFFF;
 }
 
 /* PDF가 보이는 영역 (남는 높이를 모두 차지) */
 .doc-frame {
-   flex: 1;
-   width: 100%;
-   border: 0;
-   border-top: 1px solid var(--line);
-   background: var(--soft);
+    flex: 1;
+    width: 100%;
+    border: 0;
+    border-top: 1px solid var(--line);
+    background: var(--soft);
 }
 
 /* 아래쪽: 새 탭에서 크게 보기 */
 .doc-open {
-   padding: 12px 20px;
-   font-size: 13px;
-   font-weight: 600;
-   text-align: center;
-   border-top: 1px solid var(--line);
+    padding: 12px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    border-top: 1px solid var(--line);
 }
 
 .doc-open:hover {
-   background: var(--soft);
+    background: var(--soft);
 }
 
 .footer {
-   text-align: center;
-   font-size: 12px;
-   color: var(--muted);
-   padding: 16px 0 8px;
+    text-align: center;
+    font-size: 12px;
+    color: var(--muted);
+    padding: 16px 0 8px;
 }
 
 /* =========================================================
@@ -493,94 +510,100 @@ ul {
    사이드바를 상단 가로 메뉴로 바꿉니다.
    ========================================================= */
 @media (max-width: 860px) {
-   .layout {
-      flex-direction: column;
-      padding: 12px;
-      gap: 12px;
-   }
+    .layout {
+        flex-direction: column;
+        align-items: stretch;
+        /* 본문이 화면 폭을 넘지 않게 가로로 꽉 채우기 */
+        padding: 12px;
+        gap: 12px;
+    }
 
-   .sidebar {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      width: 100%;
-      flex: none;
-      padding: 8px;
-      border-radius: 14px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
-   }
+    .sidebar {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        width: 100%;
+        flex: none;
+        padding: 8px;
+        border-radius: 14px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
+    }
 
-   /* 한 줄 가로 스크롤 메뉴
+    /* 한 줄 가로 스크롤 메뉴
       스크롤하면 script.js가 지금 보는 섹션 메뉴를 자동으로 가운데로 옮겨줍니다 */
-   .nav {
-      flex-direction: row;
-      overflow-x: auto;
-      gap: 4px;
-      scrollbar-width: none;
-   }
+    .nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 4px;
+        scrollbar-width: none;
+    }
 
-   .nav::-webkit-scrollbar {
-      display: none;
-   }
+    .nav::-webkit-scrollbar {
+        display: none;
+    }
 
-   /* 라벨 · 숫자 숨김 */
-   .nav-label, .count {
-      display: none;
-   }
+    /* 라벨 · 숫자 · 영어 이름 숨김 */
+    .nav-label, .count, .nav-en {
+        display: none;
+    }
 
-   .nav-link {
-      flex: 0 0 auto;
-   }
+    .nav-link {
+        flex: 0 0 auto;
+    }
 
-   .nav-text {
-      overflow: visible;
-   }
+    .nav-text {
+        overflow: visible;
+    }
 
-   /* 상단 메뉴에 제목이 가려지지 않게 */
-   html {
-      scroll-padding-top: 76px;
-   }
+    /* 상단 메뉴에 제목이 가려지지 않게 */
+    html {
+        scroll-padding-top: 76px;
+    }
 
-   .header h1 {
-      font-size: 22px;
-   }
+    .header h1 {
+        font-size: 22px;
+    }
 
-   .card {
-      padding: 18px;
-   }
+    .card {
+        padding: 18px;
+    }
 
-   /* 항목 한 줄을 2칸 격자로:
+    /* 항목 한 줄을 2칸 격자로:
       [칩] [이름 · 설명]
            [문서 버튼 · 기간]  ← 설명 바로 아래 */
-   .row {
-      display: grid;
-      grid-template-columns: 76px 1fr;
-      column-gap: 12px;
-      row-gap: 4px;
-      align-items: start;
-   }
+    .row {
+        display: grid;
+        grid-template-columns: 76px minmax(0, 1fr);
+        /* minmax(0, 1fr): 내용이 길어도 칸이 화면 밖으로 늘어나지 않게 */
+        column-gap: 12px;
+        row-gap: 4px;
+        align-items: start;
+    }
 
-   .chip {
-      width: 76px;
-      font-size: 11px;
-   }
+    .chip {
+        width: 76px;
+        font-size: 11px;
+    }
 
-   .row-side {
-      grid-column: 2;
-      margin-left: 0;
-   }
+    .row-side {
+        grid-column: 2;
+        margin-left: 0;
+        flex-wrap: wrap;
+        /* 좁은 화면에서는 버튼과 날짜가 두 줄로 내려가도록 */
+        gap: 6px 10px;
+    }
 
-   .date {
-      min-width: 0;
-      color: var(--muted);
-   }
+    .date {
+        min-width: 0;
+        color: var(--muted);
+    }
 
-   /* 문서 팝업은 화면 가득 */
-   .doc-popup {
-      width: 100%;
-      height: 100%;
-      max-width: none;
-      max-height: none;
-      border-radius: 0;
-   }
+    /* 문서 팝업은 화면 가득 */
+    .doc-popup {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+        border-radius: 0;
+    }
 }
