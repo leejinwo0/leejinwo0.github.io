@@ -7,6 +7,19 @@
     <!-- 모바일에서 화면 폭에 맞게 보이도록 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- 라이트 · 다크 모드 둘 다 지원한다고 브라우저에 알림 (스크롤바 · 입력창 색도 맞춰짐) -->
+    <meta name="color-scheme" content="light dark">
+
+    <!-- 테마를 화면이 그려지기 전에 먼저 적용 (새로고침할 때 하얗게 번쩍이는 것 방지)
+         저장된 선택이 있으면 그것, 없으면 기기 설정(다크/라이트)을 따름 -->
+    <script>
+        try {
+            const saved = localStorage.getItem("theme");
+            const dark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            document.documentElement.dataset.theme = saved || (dark ? "dark" : "light");
+        } catch (e) { }
+    </script>
+
     <!-- 브라우저 탭 제목 / 검색 · 링크 미리보기에 쓰이는 정보 -->
     <title>이진우 | LEE JINWOO</title>
     <meta name="description" content="이진우 프로필 — 학력, 병역, 경력, 프로젝트, 활동, 수상, 자격증">
@@ -44,13 +57,21 @@
         <!-- ===================== 본문 ===================== -->
         <main class="main">
 
-            <!-- 헤더: 이름 + 오른쪽 아이콘 버튼(이메일, GitHub)
+            <!-- 헤더: 이름 + 오른쪽 다크 모드 스위치 · 아이콘 버튼(이메일, GitHub)
+                 스위치는 라이트(꺼짐 · 해) ↔ 다크(켜짐 · 달) 모드를 바꿉니다.
                  아이콘 버튼은 링크로 이동하지 않고, 가운데 팝업에 주소를 보여줍니다.
                    data-title = 팝업 제목, data-value = 팝업에 보여줄 주소
                  아이콘 그림은 icons 폴더의 파일을 불러옵니다. -->
             <header class="header">
                 <h1>이진우 <span class="name-en">LEE JINWOO</span></h1>
                 <div class="header-actions">
+                    <!-- 다크 모드 스위치 (role="switch": 화면 낭독기에 켜짐/꺼짐 스위치로 알려줌)
+                         aria-checked = true(다크) / false(라이트), script.js가 바꿈 -->
+                    <button type="button" class="theme-switch" id="theme-toggle" role="switch" aria-checked="false" aria-label="다크 모드">
+                        <span class="theme-knob">
+                            <img src="icons/sun.svg" alt="" width="14" height="14" id="theme-icon">
+                        </span>
+                    </button>
                     <button type="button" class="btn-icon js-popup" aria-label="이메일" data-title="이메일" data-value="leejinwo0@naver.com">
                         <img src="icons/mail.svg" alt="" width="18" height="18">
                     </button>
@@ -418,13 +439,15 @@
                             <span class="date">2026.02.20</span>
                         </div>
                     </li>
-                    <!-- 운전면허: 면허번호 · 사진 등 개인정보가 많아 문서 버튼 없음 -->
                     <li class="row"><span class="chip">면허</span>
                         <div class="row-main">
                             <p class="row-name">운전면허 2종보통</p>
                             <p class="row-desc">경찰청</p>
                         </div>
-                        <div class="row-side"><span class="date">2022.11.18</span></div>
+                        <div class="row-side">
+                            <button type="button" class="doc-btn js-docs" data-title="운전면허 2종보통" data-folder="docs/certifications" data-docs="20221118-driving-license-2nd-class">확인서</button>
+                            <span class="date">2022.11.18</span>
+                        </div>
                     </li>
                 </ul>
             </section>

@@ -5,7 +5,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
 
 // ---------------------------------------------------------
 // 2. 사이드바 메뉴: 항목 개수 표시 + 스크롤 위치에 맞춰 강조
-//    화면 가운데쯤 들어온 섹션의 메뉴에 'active' 클래스를 붙입니다.
+//    지금 보고 있는 섹션의 메뉴에 'active' 클래스를 붙입니다.
 // ---------------------------------------------------------
 
 // '#'으로 시작하는 메뉴 링크 가져오기
@@ -47,23 +47,52 @@ function setActive(id) {
     });
 }
 
-// IntersectionObserver: 요소가 화면에 들어왔는지 감시하는 브라우저 기능
-const observer = new IntersectionObserver(
-    (entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) setActive(entry.target.id);
-        });
-    },
-    // 화면 위 30% ~ 아래 60%를 뺀 가운데 띠에 들어오면 '보고 있는 섹션'으로 판단
-    { rootMargin: "-30% 0px -60% 0px" },
-);
+// 지금 보고 있는 섹션 찾기
+// 화면 위에서 OFFSET(px) 지점을 이미 지나간 섹션 중 가장 아래 것을 '보고 있는 섹션'으로 판단
+const OFFSET = 120;
+let lockUntil = 0; // 메뉴 클릭 직후 잠깐 자동 판단을 멈추는 시각
 
-sections.forEach((section) => {
-    if (section) observer.observe(section);
+function updateActive() {
+    if (Date.now() < lockUntil) return; // 클릭으로 이동하는 중이면 건너뛰기
+
+    let current = sections[0];
+    sections.forEach((section) => {
+        if (section && section.getBoundingClientRect().top - OFFSET <= 0) {
+            current = section;
+        }
+    });
+
+    // 페이지 맨 아래에 닿으면 마지막 섹션(자격증)을 강조
+    const atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 2;
+    if (atBottom) current = sections[sections.length - 1];
+
+    setActive(current.id);
+}
+
+// 스크롤할 때마다 확인 (requestAnimationFrame으로 너무 자주 실행되지 않게)
+let ticking = false;
+window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+        updateActive();
+        ticking = false;
+    });
 });
 
-// 처음 열었을 때는 첫 섹션(학력)을 강조
-setActive("education");
+// 메뉴를 클릭하면 누른 메뉴를 바로 강조하고,
+// 부드럽게 스크롤되는 동안(1초)은 자동 판단을 멈춰서 다른 메뉴로 바뀌지 않게
+links.forEach((link) => {
+    link.addEventListener("click", () => {
+        setActive(link.getAttribute("href").slice(1));
+        lockUntil = Date.now() + 1000;
+    });
+});
+
+// 처음 열었을 때 현재 위치에 맞게 강조
+updateActive();
 
 // ---------------------------------------------------------
 // 3. GitHub · 이메일 주소 팝업
@@ -141,7 +170,9 @@ const docOpen = document.getElementById("doc-open");
 // 문서 하나를 골라 보여주기
 function showDoc(folder, key) {
     const src = folder + "/" + key + ".pdf";
-    docFrame.src = src + "#toolbar=0&navpanes=0&view=FitH";
+    // #toolbar=0 : 위쪽 도구 막대 숨기기 · &navpanes=0 : 왼쪽 미리보기 칸 숨기기
+    // &view=FitH : 페이지를 팝업 가로 폭에 맞추기 (크롬 · 엣지에서 적용)
+    docFrame.src = src + "#toolbar=0&navpanes=0&view=FitH"; // 팝업 안에 PDF 표시
     docOpen.href = src; // "새 탭에서 크게 보기" 주소
 
     // 고른 탭만 검정으로 강조
@@ -189,3 +220,31 @@ docPopup.addEventListener("click", (e) => {
 docPopup.addEventListener("close", () => {
     docFrame.src = "";
 });
+
+// ---------------------------------------------------------
+// 5. 라이트 · 다크 모드 전환
+//    <html data-theme="light | dark"> 값을 바꾸면 style.css의 색상 변수가 바뀝니다.
+//    고른 테마는 브라우저에 저장해서 다음에 와도 유지됩니다.
+// ---------------------------------------------------------
+const themeBtn = document.getElementById("theme-toggle");
+const themeIcon = document.getElementById("theme-icon");
+
+// 지금 테마에 맞게 스위치 상태 · 아이콘 바꾸기
+// (라이트 = 꺼짐 · 해 아이콘, 다크 = 켜짐 · 달 아이콘)
+function syncThemeButton() {
+    const dark = document.documentElement.dataset.theme === "dark";
+    themeBtn.setAttribute("aria-checked", dark ? "true" : "false");
+    themeIcon.src = dark ? "icons/moon.svg" : "icons/sun.svg";
+}
+
+themeBtn.addEventListener("click", () => {
+    const next =
+        document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    try {
+        localStorage.setItem("theme", next); // 선택 기억하기
+    } catch (e) {}
+    syncThemeButton();
+});
+
+syncThemeButton(); // 처음 열었을 때 아이콘 맞추기
