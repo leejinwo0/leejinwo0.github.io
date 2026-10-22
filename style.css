@@ -381,6 +381,13 @@ ul {
     white-space: nowrap;
 }
 
+.chip-sub {
+    display: block;
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--muted);
+}
+
 /* 기간 · 날짜
    tabular-nums: 숫자 폭을 똑같이 맞춰서 줄마다 길이가 들쭉날쭉하지 않게
    min-width + 왼쪽 정렬: 날짜가 한 세로줄에서 시작하도록 */
@@ -421,6 +428,14 @@ ul {
 
 .doc-btn:hover {
     background: var(--soft);
+}
+
+/* 웹사이트 링크 버튼: 문서 버튼과 같은 모양으로 맞추기
+   (<a> 태그는 기본이 글자 취급이라 가운데 정렬을 따로 지정) */
+.link-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* =========================================================
