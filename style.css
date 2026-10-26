@@ -359,12 +359,25 @@ ul {
     color: var(--muted);
 }
 
-/* 오른쪽 끝으로 밀기 (문서 버튼 + 기간을 가로로) */
+/* 오른쪽 칸: [버튼 자리 | 기간 자리] 2칸 격자
+   버튼이 없는 줄도 버튼 자리를 비워 두어서, 모든 섹션의 날짜가 한 세로줄에서 시작 */
 .row-side {
     margin-left: auto;
-    display: flex;
+    display: grid;
+    grid-template-columns: 100px 172px;
     align-items: center;
-    gap: 10px;
+    column-gap: 10px;
+}
+
+/* 버튼은 왼쪽 칸(오른쪽 정렬), 기간은 항상 오른쪽 칸 */
+.row-side>.doc-btn {
+    grid-column: 1;
+    justify-self: end;
+}
+
+.row-side>.date,
+.row-side>.dates {
+    grid-column: 2;
 }
 
 /* 구분 칩 (졸업 · 근무 중 · 팀 프로젝트 · 대상 등)
@@ -379,13 +392,6 @@ ul {
     background: var(--soft);
     color: var(--badge-text);
     white-space: nowrap;
-}
-
-.chip-sub {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--muted);
 }
 
 /* 기간 · 날짜
@@ -410,12 +416,11 @@ ul {
     gap: 2px;
 }
 
-/* 문서 · 상장 · 확인서 버튼 (날짜 왼쪽)
-   min-width: 버튼 글자 길이가 달라도 폭을 같게 → 날짜가 한 세로줄에 맞춰짐 */
+/* 문서 · 상장 · 자격증 · 사이트 버튼 (날짜 왼쪽) */
 .doc-btn {
-    min-width: 64px;
+    width: 100px;
     min-height: 28px;
-    padding: 0 12px;
+    padding: 0 4px;
     border: 1px solid var(--border);
     border-radius: 999px;
     background: var(--card);
@@ -424,18 +429,19 @@ ul {
     font-size: 12px;
     font-weight: 600;
     cursor: pointer;
+    white-space: nowrap;
 }
 
-.doc-btn:hover {
-    background: var(--soft);
-}
-
-/* 웹사이트 링크 버튼: 문서 버튼과 같은 모양으로 맞추기
-   (<a> 태그는 기본이 글자 취급이라 가운데 정렬을 따로 지정) */
+/* 사이트 링크 버튼(<a>): <button>과 달리 글자가 위로 붙어서
+   가로 · 세로 가운데 정렬을 따로 지정 */
 .link-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+}
+
+.doc-btn:hover {
+    background: var(--soft);
 }
 
 /* =========================================================
@@ -689,6 +695,9 @@ ul {
     .row-side {
         grid-column: 2;
         margin-left: 0;
+        display: flex;
+        /* 모바일은 빈 버튼 자리 없이 버튼 · 날짜를 앞에서부터 */
+        align-items: center;
         flex-wrap: wrap;
         /* 좁은 화면에서는 버튼과 날짜가 두 줄로 내려가도록 */
         gap: 6px 10px;

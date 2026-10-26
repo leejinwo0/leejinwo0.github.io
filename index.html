@@ -7,6 +7,9 @@
     <!-- 모바일에서 화면 폭에 맞게 보이도록 설정 -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!-- 날짜 숫자를 전화번호로 인식해 색이 바뀌는 것 방지 (iOS 사파리 등) -->
+    <meta name="format-detection" content="telephone=no">
+
     <!-- 라이트 · 다크 모드 둘 다 지원한다고 브라우저에 알림 (스크롤바 · 입력창 색도 맞춰짐) -->
     <meta name="color-scheme" content="light dark">
 
@@ -87,16 +90,30 @@
                   <h2>                        섹션 제목
                   <ul class="list">           항목 목록
                     <li class="row">          항목 한 줄
-                      .chip                   맨 앞: 구분 칩 (졸업, 근무 중, 팀 프로젝트, 대상 …)
+                      .chip                   맨 앞: 종류 (한 줄 · 2~4글자)
                       .row-main               가운데: 이름(.row-name) + 설명(.row-desc)
-                      .row-side               오른쪽: 문서 버튼 + 기간(.date)
+                      .row-side               오른쪽: [버튼 자리 | 기간 자리] (버튼이 없어도 날짜 위치 고정)
+
+                ===================== 글 작성 규칙 =====================
+                  .chip      = 그 항목의 "종류"     예) 대학교 · 현역 · 공공기관 · 실무 · 교육 · 대상 · 국가기술
+                  .row-name  = 공식 이름            예) 학교명 · 기관명 · 프로젝트명 · 대회명 · 자격명
+                  .row-desc  = 세부 정보를 " · "로 이어 쓰기 (섹션마다 순서 고정)
+                    학력      학위/계열 졸업 · 학점/학교 유형
+                    병역      계급 전역 구분 · 병과
+                    경력      사업명 · 담당 업무
+                    프로젝트  인원 · 무엇인지 · 기술/성과
+                    활동      기관/사업 · 내용
+                    수상      부문 · 주최 기관
+                    자격증    발급 기관
 
                 항목은 최신순(시작일 기준)으로 위에서 아래로 작성합니다.
                 기간 표기: 시작 – 끝 (진행 중이면 "시작 –")
 
                 ===================== 문서 버튼 (.js-docs) =====================
                 누르면 PDF 미리보기 팝업이 열립니다. (모든 섹션 공용)
-                  data-title  = 팝업 제목
+                  버튼 글자   = 그 안에 든 문서 이름 (증명서 · 문서 · 수료증 · 이수증 · 상장 · 자격증)
+                                외부 링크는 <a class="doc-btn link-btn"> + "사이트"
+                  data-title  = 팝업 제목 (.row-name과 같게)
                   data-folder = PDF가 들어 있는 폴더
                   data-docs   = PDF 파일 이름(.pdf 제외), 여러 개면 쉼표로 → 탭이 여러 개
                   → 파일 위치 = data-folder + "/" + 파일이름 + ".pdf"
@@ -110,37 +127,37 @@
                     graduation 졸업증명서 · transcript 성적증명서 · military-record 병적증명서
                     employment 재직증명서 · plan 수행계획서 · report 결과보고서
                     design 화면설계서 · summary 프로젝트정리 · completion 수료증
-                    award 상장 · qualification 확인서
+                    certificate 이수증 · award 상장 · qualification 자격증
 
                 섹션별 버튼 · 폴더
                   학력       증명서   docs/education
                   병역       증명서   docs/military
                   경력       증명서   docs/experience
                   프로젝트   문서     docs/projects
-                  활동       수료증   docs/activities
+                  활동       수료증 · 이수증   docs/activities
                   수상       상장     docs/awards
-                  자격증     확인서   docs/certifications
+                  자격증     자격증   docs/certifications
             -->
 
             <!-- ===== 학력 =====
-                 칩 = 졸업 여부, 증명서 = 졸업증명서 · 성적증명서 -->
+                 칩 = 학교 종류, 설명 = 학위/계열 졸업 · 학점/학교 유형 -->
             <section id="education" class="card">
                 <h2>학력</h2>
                 <ul class="list">
-                    <li class="row"><span class="chip">졸업</span>
+                    <li class="row"><span class="chip">대학교</span>
                         <div class="row-main">
                             <p class="row-name">홍익대학교 소프트웨어융합학과</p>
-                            <p class="row-desc">학사 · 학점 4.07 / 4.5</p>
+                            <p class="row-desc">학사 졸업 · 학점 4.07 / 4.5</p>
                         </div>
                         <div class="row-side">
                             <!-- <button type="button" class="doc-btn js-docs" data-title="홍익대학교 소프트웨어융합학과" data-folder="docs/education" data-docs="20260220-hongik-graduation">증명서</button> -->
                             <span class="date">2020.03.02 – 2026.02.20</span>
                         </div>
                     </li>
-                    <li class="row"><span class="chip">졸업</span>
+                    <li class="row"><span class="chip">고등학교</span>
                         <div class="row-main">
                             <p class="row-name">금정고등학교</p>
-                            <p class="row-desc">자율형 공립고 · 자연계열</p>
+                            <p class="row-desc">자연계열 졸업 · 자율형 공립고</p>
                         </div>
                         <div class="row-side">
                             <!-- <button type="button" class="doc-btn js-docs" data-title="금정고등학교" data-folder="docs/education" data-docs="20200214-geumjeong-graduation">증명서</button> -->
@@ -151,17 +168,17 @@
             </section>
 
             <!-- ===== 병역 =====
-                 칩 = 군별, 증명서 = 병적증명서 -->
+                 칩 = 복무 형태, 설명 = 계급 전역 구분 · 병과 -->
             <section id="military" class="card">
                 <h2>병역</h2>
                 <ul class="list">
-                    <li class="row"><span class="chip">만기전역</span>
+                    <li class="row"><span class="chip">현역</span>
                         <div class="row-main">
-                            <p class="row-name">통신장비정비병</p>
-                            <p class="row-desc">해병대 · 병장</p>
+                            <p class="row-name">해병대 병 1269기</p>
+                            <p class="row-desc">병장 만기전역 · 통신 병과</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="해병대 · 통신장비정비병" data-folder="docs/military" data-docs="20221025-republic-of-korea-marine-corps">증명서</button>
+                            <button type="button" class="doc-btn js-docs" data-title="해병대 병 1269기" data-folder="docs/military" data-docs="20221025-republic-of-korea-marine-corps">증명서</button>
                             <span class="date">2021.04.26 – 2022.10.25</span>
                         </div>
                     </li>
@@ -169,14 +186,14 @@
             </section>
 
             <!-- ===== 경력 =====
-                 칩 = 재직 상태, 증명서 = 재직증명서 -->
+                 칩 = 기관 종류, 설명 = 사업명 · 담당 업무 -->
             <section id="career" class="card">
                 <h2>경력</h2>
                 <ul class="list">
-                    <li class="row"><span class="chip">근무 중</span>
+                    <li class="row"><span class="chip">공공기관</span>
                         <div class="row-main">
                             <p class="row-name">서울시 디지털도시국 공간정보과</p>
-                            <p class="row-desc">AI활용 공간정보구축사업 매력일자리 · 웹맵서비스개발(프로그래밍)</p>
+                            <p class="row-desc">AI활용 공간정보구축사업 · 웹맵서비스개발(프로그래밍)</p>
                         </div>
                         <div class="row-side">
                             <!-- <button type="button" class="doc-btn js-docs" data-title="서울시 디지털도시국 공간정보과" data-folder="docs/experience" data-docs="20260401-seoul-employment">증명서</button> -->
@@ -187,38 +204,39 @@
             </section>
 
             <!-- ===== 프로젝트 =====
-                 칩 = 프로젝트 구분, 문서 = 수행계획서 · 결과보고서 · 화면설계서 · 프로젝트정리 -->
+                 칩 = 프로젝트 종류 (실무 · 공모전 · 학교), 설명 = 인원 · 무엇인지 · 기술/성과
+                 사이트 버튼 = 결과물 웹사이트(새 탭), 문서 버튼 = 수행계획서 · 결과보고서 · 화면설계서 · 프로젝트정리 -->
             <section id="projects" class="card">
                 <h2>프로젝트</h2>
                 <ul class="list">
-                    <li class="row"><span class="chip">실무<small class="chip-sub">1인</small></span>
+                    <li class="row"><span class="chip">실무</span>
                         <div class="row-main">
-                            <p class="row-name">3·1운동 스토리맵</p>
-                            <p class="row-desc">스마트 서울맵 API를 활용한 웹맵페이지</p>
+                            <p class="row-name">서울 히스토리맵, 1919년 3월 그날의 발자취</p>
+                            <p class="row-desc">1인 · 3·1운동 역사 웹맵 · 스마트서울맵 API</p>
                         </div>
                         <div class="row-side">
                             <a class="doc-btn link-btn" href="https://march-first-storypage.vercel.app/" target="_blank" rel="noopener">사이트</a>
-                            <!-- <button type="button" class="doc-btn js-docs" data-title="3·1운동 스토리맵" data-folder="docs/projects" data-docs="20260618-march-first-storymap-plan,20260618-march-first-storymap-report,20260618-march-first-storymap-design,20260618-march-first-storymap-summary">문서</button> -->
+                            <!-- <button type="button" class="doc-btn js-docs" data-title="서울 히스토리맵 — 1919년 3월 그날의 발자취" data-folder="docs/projects" data-docs="20260618-march-first-storymap-plan,20260618-march-first-storymap-report,20260618-march-first-storymap-design,20260618-march-first-storymap-summary">문서</button> -->
                             <span class="date">2026.06.18 –</span>
                         </div>
                     </li>
-                    <li class="row"><span class="chip">공모전<small class="chip-sub">6인 팀</small></span>
+                    <li class="row"><span class="chip">공모전</span>
                         <div class="row-main">
-                            <p class="row-name">곰곰소방단 — VR 화재 대피 훈련</p>
-                            <p class="row-desc">VR 화재 대피 훈련 시뮬레이션</p>
+                            <p class="row-name">곰곰소방단</p>
+                            <p class="row-desc">6인 팀 · VR 화재 대피 훈련 시뮬레이션</p>
                         </div>
                         <div class="row-side">
-                            <!-- <button type="button" class="doc-btn js-docs" data-title="곰곰소방단 — VR 화재 대피 훈련" data-folder="docs/projects" data-docs="20250801-gomgom-vr-fire-summary">문서</button> -->
+                            <!-- <button type="button" class="doc-btn js-docs" data-title="곰곰소방단" data-folder="docs/projects" data-docs="20250801-gomgom-vr-fire-summary">문서</button> -->
                             <span class="date">2025.07.21 – 2025.08.01</span>
                         </div>
                     </li>
-                    <li class="row"><span class="chip">학교<small class="chip-sub">4인 팀</small></span>
+                    <li class="row"><span class="chip">학교</span>
                         <div class="row-main">
-                            <p class="row-name">세종 GPT — 역사위인특화 AI 챗봇</p>
-                            <p class="row-desc">종합설계(1) RAG 챗봇 · 종합설계(2) EXAONE 파인튜닝</p>
+                            <p class="row-name">역사위인특화 AI 챗봇</p>
+                            <p class="row-desc">4인 팀 · 종합설계(1) RAG 챗봇 · 종합설계(2) EXAONE 파인튜닝</p>
                         </div>
                         <div class="row-side">
-                            <!-- <button type="button" class="doc-btn js-docs" data-title="세종 GPT — 역사위인특화 AI 챗봇" data-folder="docs/projects" data-docs="20251109-sejong-gpt-summary">문서</button> -->
+                            <!-- <button type="button" class="doc-btn js-docs" data-title="역사위인특화 AI 챗봇" data-folder="docs/projects" data-docs="20251109-sejong-gpt-summary">문서</button> -->
                             <!-- 기간이 2개: 설명 순서와 같게 (1) → (2) -->
                             <div class="dates">
                                 <span class="date">2025.03.03 – 2025.06.13</span>
@@ -230,67 +248,68 @@
             </section>
 
             <!-- ===== 활동 =====
-                 칩 = 활동 구분 (교육 · 일경험 · 산학연계), 수료증 = 수료증 -->
+                 칩 = 활동 종류 (교육 · 일경험 · 산학연계), 설명 = 기관/사업 · 내용
+                 버튼 = 실물 문서 이름 그대로 (수료증 · 이수증) -->
             <section id="activity" class="card">
                 <h2>활동</h2>
                 <ul class="list">
                     <li class="row"><span class="chip">교육</span>
                         <div class="row-main">
-                            <p class="row-name">OpenCV Zoo 기반의 머신러닝 · 딥러닝 영상분석 실무 프로젝트</p>
-                            <p class="row-desc">기획발전특구 수요맞춤형 지원사업 신규인력 양성과정</p>
+                            <p class="row-name">OpenCV Zoo 기반 머신러닝 · 딥러닝 영상분석 실무 프로젝트</p>
+                            <p class="row-desc">기획발전특구 수요맞춤형 지원사업 · 신규인력 양성과정</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="OpenCV Zoo 영상분석 실무 프로젝트 수료증" data-folder="docs/activities" data-docs="20250925-opencv-zoo-completion">이수증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="OpenCV Zoo 기반 머신러닝 · 딥러닝 영상분석 실무 프로젝트" data-folder="docs/activities" data-docs="20250925-opencv-zoo-completion">이수증</button>
                             <span class="date">2025.09.01 – 2025.09.25</span>
                         </div>
                     </li>
                     <li class="row"><span class="chip">일경험</span>
                         <div class="row-main">
-                            <p class="row-name">(주)위니드소프트 · 미래내일일경험 프로젝트형</p>
-                            <p class="row-desc">VR 화재현장 감식 플랫폼</p>
+                            <p class="row-name">미래내일일경험 프로젝트형 2차</p>
+                            <p class="row-desc">(주)위니드소프트 · VR 화재현장 감식 플랫폼</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="미래내일일경험 프로젝트형 2차 수료증" data-folder="docs/activities" data-docs="20251005-weneedsoft-2-completion">수료증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="미래내일일경험 프로젝트형 2차" data-folder="docs/activities" data-docs="20251005-weneedsoft-2-completion">수료증</button>
                             <span class="date">2025.08.11 – 2025.10.05</span>
                         </div>
                     </li>
                     <li class="row"><span class="chip">일경험</span>
                         <div class="row-main">
-                            <p class="row-name">(주)위니드소프트 · 미래내일일경험 프로젝트형</p>
-                            <p class="row-desc">VR 화재현장 감식 플랫폼</p>
+                            <p class="row-name">미래내일일경험 프로젝트형 1차</p>
+                            <p class="row-desc">(주)위니드소프트 · VR 화재현장 감식 플랫폼</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="미래내일일경험 프로젝트형 1차 수료증" data-folder="docs/activities" data-docs="20250725-weneedsoft-1-completion">수료증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="미래내일일경험 프로젝트형 1차" data-folder="docs/activities" data-docs="20250725-weneedsoft-1-completion">수료증</button>
                             <span class="date">2025.06.02 – 2025.07.25</span>
                         </div>
                     </li>
                     <li class="row"><span class="chip">산학연계</span>
                         <div class="row-main">
-                            <p class="row-name">SW융합클러스터2.0 산학연계 뉴노멀 프로젝트</p>
-                            <p class="row-desc">산학연계 프로젝트</p>
+                            <p class="row-name">뉴노멀 프로젝트</p>
+                            <p class="row-desc">SW융합클러스터2.0 · 산학연계 프로젝트 과정</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="SW융합클러스터2.0 뉴노멀 프로젝트 수료증" data-folder="docs/activities" data-docs="20251130-new-normal-completion">수료증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="뉴노멀 프로젝트" data-folder="docs/activities" data-docs="20251130-new-normal-completion">수료증</button>
                             <span class="date">2025.03.01 – 2025.11.30</span>
                         </div>
                     </li>
                     <li class="row"><span class="chip">교육</span>
                         <div class="row-main">
                             <p class="row-name">메타버스 융합 SW 아카데미 3기</p>
-                            <p class="row-desc">웹프로그래밍</p>
+                            <p class="row-desc">웹프로그래밍 과정</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="메타버스 융합 SW 아카데미 3기 수료증" data-folder="docs/activities" data-docs="20241207-metaverse-3-completion">수료증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="메타버스 융합 SW 아카데미 3기" data-folder="docs/activities" data-docs="20241207-metaverse-3-completion">수료증</button>
                             <span class="date">2024.06.29 – 2024.12.07</span>
                         </div>
                     </li>
                     <li class="row"><span class="chip">교육</span>
                         <div class="row-main">
                             <p class="row-name">메타버스 융합 SW 아카데미 2기</p>
-                            <p class="row-desc">웹프로그래밍</p>
+                            <p class="row-desc">웹프로그래밍 과정</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="메타버스 융합 SW 아카데미 2기 수료증" data-folder="docs/activities" data-docs="20240616-metaverse-2-completion">수료증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="메타버스 융합 SW 아카데미 2기" data-folder="docs/activities" data-docs="20240616-metaverse-2-completion">수료증</button>
                             <span class="date">2024.01.03 – 2024.06.16</span>
                         </div>
                     </li>
@@ -298,33 +317,33 @@
             </section>
 
             <!-- ===== 수상 =====
-                 칩 = 상 등급, 설명 = 부문 · 주최 기관, 상장 = 상장 -->
+                 칩 = 상 등급, 설명 = 부문 · 주최 기관 (부문이 없으면 주최 기관만) -->
             <section id="awards" class="card">
                 <h2>수상</h2>
                 <ul class="list">
                     <li class="row"><span class="chip">장려상</span>
                         <div class="row-main">
                             <p class="row-name">DX FESTA STORY LAB</p>
-                            <p class="row-desc">고려대학교 세종산학협력단 · 홍익대학교 세종캠퍼스 산학협력단</p>
+                            <p class="row-desc">교육 및 프로젝트 참여 부문 · 고려대학교 세종산학협력단 · 홍익대학교 세종캠퍼스 산학협력단</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="DX FESTA STORY LAB 장려상" data-folder="docs/awards" data-docs="20251120-dx-festa-award">상장</button>
+                            <button type="button" class="doc-btn js-docs" data-title="DX FESTA STORY LAB" data-folder="docs/awards" data-docs="20251120-dx-festa-award">상장</button>
                             <span class="date">2025.11.20</span>
                         </div>
                     </li>
                     <li class="row"><span class="chip">장려상</span>
                         <div class="row-main">
                             <p class="row-name">2025년도 지역혁신 인재양성 연합 페스티발</p>
-                            <p class="row-desc">공모전 · 데이터 분석 및 보안 부문 · 한국정보통신보안윤리학회</p>
+                            <p class="row-desc">데이터 분석 및 보안 부문 · 한국정보통신보안윤리학회</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="지역혁신 인재양성 연합 페스티발 장려상" data-folder="docs/awards" data-docs="20251114-regional-festival-award">상장</button>
+                            <button type="button" class="doc-btn js-docs" data-title="2025년도 지역혁신 인재양성 연합 페스티발" data-folder="docs/awards" data-docs="20251114-regional-festival-award">상장</button>
                             <span class="date">2025.11.14</span>
                         </div>
                     </li>
-                    <li class="row"><span class="chip">우수상</span>
+                    <li class="row"><span class="chip">최우수상</span>
                         <div class="row-main">
-                            <p class="row-name">OpenCV Zoo 기반의 머신러닝 · 딥러닝 영상분석 실무 팀 프로젝트</p>
+                            <p class="row-name">OpenCV Zoo 기반 머신러닝 · 딥러닝 영상분석 실무 팀 프로젝트</p>
                             <p class="row-desc">홍익대학교 산학협력단</p>
                         </div>
                         <div class="row-side">
@@ -334,10 +353,10 @@
                     <li class="row"><span class="chip">대상</span>
                         <div class="row-main">
                             <p class="row-name">세종 DX해커톤</p>
-                            <p class="row-desc">공모전 · AI활용 콘텐츠 부문 · 세종특별시</p>
+                            <p class="row-desc">AI활용 콘텐츠 부문 · 세종특별자치시</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="세종 DX해커톤 대상" data-folder="docs/awards" data-docs="20250802-sejong-dx-hackathon-award">상장</button>
+                            <button type="button" class="doc-btn js-docs" data-title="세종 DX해커톤" data-folder="docs/awards" data-docs="20250802-sejong-dx-hackathon-award">상장</button>
                             <span class="date">2025.08.02</span>
                         </div>
                     </li>
@@ -345,8 +364,8 @@
             </section>
 
             <!-- ===== 자격증 =====
-                 칩 = 자격 종류 (국가기술 = 국가기술자격, 국가공인 = 국가공인 민간자격)
-                 설명 = 발급 기관, 확인서 = 자격증 확인서
+                 칩 = 자격 종류 (국가기술 = 국가기술자격, 국가공인 = 국가공인 민간자격, 국가자격, 면허)
+                 설명 = 발급 기관
                  IT · 기타 그룹별로 취득일 최신순 -->
             <section id="certs" class="card">
                 <h2>자격증</h2>
@@ -367,10 +386,10 @@
                     <li class="row"><span class="chip">국가공인</span>
                         <div class="row-main">
                             <p class="row-name">리눅스마스터 2급</p>
-                            <p class="row-desc">한국정보통신진흥협회(KAIT)</p>
+                            <p class="row-desc">한국정보통신진흥협회</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="리눅스마스터 2급" data-folder="docs/certifications" data-docs="20260403-linux-master-2-qualification">자격증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="리눅스마스터 2급" data-folder="docs/certifications" data-docs="20260403-linux-master-2-qualification">합격확인서</button>
                             <span class="date">2026.04.03</span>
                         </div>
                     </li>
@@ -387,10 +406,10 @@
                     <li class="row"><span class="chip">국가공인</span>
                         <div class="row-main">
                             <p class="row-name">네트워크관리사 2급</p>
-                            <p class="row-desc">한국정보통신자격협회(ICQA)</p>
+                            <p class="row-desc">한국정보통신자격협회</p>
                         </div>
                         <div class="row-side">
-                            <button type="button" class="doc-btn js-docs" data-title="네트워크관리사 2급" data-folder="docs/certifications" data-docs="20241008-network-manager-2-qualification">자격증</button>
+                            <button type="button" class="doc-btn js-docs" data-title="네트워크관리사 2급" data-folder="docs/certifications" data-docs="20241008-network-manager-2-qualification">자격취득확인서</button>
                             <span class="date">2024.10.08</span>
                         </div>
                     </li>
@@ -422,6 +441,16 @@
                         <div class="row-side">
                             <button type="button" class="doc-btn js-docs" data-title="워드프로세서" data-folder="docs/certifications" data-docs="20121214-word-processor-qualification">자격증</button>
                             <span class="date">2012.12.14</span>
+                        </div>
+                    </li>
+                    <li class="row"><span class="chip">국가공인</span>
+                        <div class="row-main">
+                            <p class="row-name">ITQ OA Master</p>
+                            <p class="row-desc">한국생산성본부</p>
+                        </div>
+                        <div class="row-side">
+                            <button type="button" class="doc-btn js-docs" data-title="ITQ OA Master" data-folder="docs/certifications" data-docs="20110331-itq-oa-master-qualification">자격취득확인서</button>
+                            <span class="date">2011.03.31</span>
                         </div>
                     </li>
                 </ul>
@@ -471,7 +500,7 @@
     </dialog>
 
     <!-- ===================== 문서 미리보기 팝업 =====================
-         증명서 · 프로젝트 문서 · 수료증 · 상장 · 확인서를 모두 이 팝업 하나로 보여줍니다.
+         증명서 · 프로젝트 문서 · 수료증 · 이수증 · 상장 · 자격증을 모두 이 팝업 하나로 보여줍니다.
          script.js가 제목 · 탭 · PDF 주소를 채워 넣습니다. -->
     <dialog id="doc-popup" class="doc-popup">
         <div class="doc-head">

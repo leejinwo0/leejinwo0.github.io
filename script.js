@@ -133,7 +133,7 @@ popup.addEventListener("click", (e) => {
 });
 
 // ---------------------------------------------------------
-// 4. 문서 미리보기 팝업 (증명서 · 프로젝트 문서 · 수료증 · 상장 · 확인서 공용)
+// 4. 문서 미리보기 팝업 (증명서 · 프로젝트 문서 · 수료증 · 이수증 · 상장 · 자격증 공용)
 //    .js-docs 버튼의 data-docs 목록으로 탭을 만들고,
 //    고른 탭의 PDF를 팝업 안 iframe에 띄웁니다.
 //    PDF 파일 위치 = data-folder + "/" + 문서이름 + ".pdf"
@@ -151,8 +151,9 @@ const DOC_TYPES = {
     design: "화면설계서",
     summary: "프로젝트정리",
     completion: "수료증",
+    certificate: "이수증",
     award: "상장",
-    qualification: "확인서",
+    qualification: "자격증",
 };
 
 // 파일 이름 끝의 문서종류를 찾아 탭 이름 돌려주기 (못 찾으면 버튼 글자)
