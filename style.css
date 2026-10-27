@@ -359,25 +359,18 @@ ul {
     color: var(--muted);
 }
 
-/* 오른쪽 칸: [버튼 자리 | 기간 자리] 2칸 격자
-   버튼이 없는 줄도 버튼 자리를 비워 두어서, 모든 섹션의 날짜가 한 세로줄에서 시작 */
 .row-side {
     margin-left: auto;
-    display: grid;
-    grid-template-columns: 100px 172px;
+    display: flex;
     align-items: center;
-    column-gap: 10px;
+    justify-content: flex-end;
+    gap: 8px;
 }
 
-/* 버튼은 왼쪽 칸(오른쪽 정렬), 기간은 항상 오른쪽 칸 */
-.row-side>.doc-btn {
-    grid-column: 1;
-    justify-self: end;
-}
-
+/* 날짜와 버튼 사이는 조금 더 띄우기 */
 .row-side>.date,
 .row-side>.dates {
-    grid-column: 2;
+    margin-left: 2px;
 }
 
 /* 구분 칩 (졸업 · 근무 중 · 팀 프로젝트 · 대상 등)

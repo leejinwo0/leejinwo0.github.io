@@ -154,6 +154,8 @@ const DOC_TYPES = {
     certificate: "이수증",
     award: "상장",
     qualification: "자격증",
+    diploma: "학위증",
+    picket: "수상 피켓",
 };
 
 // 파일 이름 끝의 문서종류를 찾아 탭 이름 돌려주기 (못 찾으면 버튼 글자)
