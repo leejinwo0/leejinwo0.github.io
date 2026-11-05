@@ -1,481 +1,540 @@
 /* =========================================================
-   1. 색상 · 글꼴 변수
-   여기 값만 바꾸면 사이트 전체에 적용됩니다.
+   1. 색상 · 글꼴 변수 (여기 값만 바꾸면 전체에 적용)
    ========================================================= */
 :root {
-    --bg: #E9E7E2;
-    /* 페이지 배경 (웜그레이) */
+    --bg: #FFFFFF;
+    /* 페이지 배경 (흰색) */
     --card: #FFFFFF;
     /* 카드 배경 */
-    --soft: #F3F2EF;
-    /* 칩 · 숫자 · 버튼 배경 */
-    --line: #F0EEE9;
-    /* 목록 구분선 */
-    --ink: #121212;
-    /* 기본 글자색 · 선택된 메뉴 */
-    --muted: #6E6E68;
-    /* 보조 글자색 (설명, 라벨) */
-    --badge-text: #3A3A38;
-    /* 칩 · 날짜 글자색 */
+    --soft: #F5F6F8;
+    /* 연한 회색 면 (태그 · 배지 배경) */
+    --line: #E8EAEE;
+    /* 테두리 · 구분선 */
+    --ink: #16181D;
+    /* 기본 글자 */
+    --muted: #6B7280;
+    /* 보조 글자 */
+    --accent: #2F5BD3;
+    /* 포인트 색 (카드 왼쪽 테두리 · 점 · 강조 버튼) */
+    --accent-soft: #EEF2FD;
+    /* 포인트 연한 색 (배지) */
+    --on-accent: #FFFFFF;
+    --nav-bg: rgba(255, 255, 255, .85);
+    /* 상단 메뉴 반투명 배경 */
+    --shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 4px 16px rgba(16, 24, 40, .05);
     --radius: 18px;
-    /* 카드 모서리 둥글기 */
     --font: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-    /* 본문 글꼴 (나눔고딕) */
-    --font-num: 'Nanum Gothic', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-    /* 날짜 · 영문 글꼴 */
-    --on-ink: #FFFFFF;
-    /* 진한 배경(선택된 메뉴 · 탭 · 닫기 버튼) 위의 글자색 */
-    --on-ink-muted: #BDBBB5;
-    /* 진한 배경 위의 보조 글자색 (선택된 메뉴의 영어 이름) */
-    --border: #DEDCD6;
-    /* 문서 버튼 테두리 */
-    --shadow: rgba(0, 0, 0, .18);
-    /* 팝업 그림자 */
-}
-
-/* ---------- 다크 모드 ----------
-   <html data-theme="dark">일 때 위 변수들을 어두운 값으로 바꿉니다.
-   (script.js와 index.html 맨 위 스크립트가 data-theme을 붙임) */
-:root[data-theme="dark"] {
-    --bg: #141413;
-    /* 페이지 배경 */
-    --card: #1E1E1C;
-    /* 카드 배경 */
-    --soft: #2A2A27;
-    /* 칩 · 숫자 · 버튼 배경 */
-    --line: #2C2C29;
-    /* 목록 구분선 */
-    --ink: #EDEDE8;
-    /* 기본 글자색 · 선택된 메뉴 배경 */
-    --muted: #A2A29B;
-    /* 보조 글자색 */
-    --badge-text: #D2D2CB;
-    /* 칩 · 날짜 글자색 */
-    --on-ink: #121212;
-    --on-ink-muted: #5E5E58;
-    --border: #3A3A37;
-    --shadow: rgba(0, 0, 0, .5);
-}
-
-/* 다크 모드에서 검은 선 아이콘(icons 폴더 SVG)을 흰색으로 뒤집기 */
-:root[data-theme="dark"] .btn-icon img,
-:root[data-theme="dark"] .theme-knob img {
-    filter: invert(1);
 }
 
 /* =========================================================
-   2. 기본 초기화
+   2. 기본
    ========================================================= */
-/* 패딩을 크기에 포함 */
 * {
     box-sizing: border-box;
 }
 
-/* 메뉴 클릭 시 부드럽게 이동 */
 html {
     scroll-behavior: smooth;
-    scroll-padding-top: 20px;
+    scroll-padding-top: 80px;
+    /* 상단 메뉴에 제목이 가려지지 않게 */
 }
 
 body {
     margin: 0;
     background: var(--bg);
-    transition: background .2s, color .2s;
-    /* 테마 바꿀 때 부드럽게 */
     color: var(--ink);
     font-family: var(--font);
-    line-height: 1.5;
+    line-height: 1.55;
 }
 
-p, h1, h2 {
+h1, h2, h3, p, ol, ul {
     margin: 0;
 }
 
-/* 링크 밑줄 · 파란색 제거 */
+ol {
+    list-style: none;
+    padding: 0;
+}
+
 a {
     color: inherit;
     text-decoration: none;
 }
 
-/* 목록 점 제거 */
-ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
 /* =========================================================
-   3. 레이아웃: 사이드바 + 본문 가로 배치
+   3. 상단 메뉴: 반투명 막대, 스크롤해도 위에 붙음
    ========================================================= */
-.layout {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 16px;
-}
-
-.main {
-    flex: 1;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-/* =========================================================
-   4. 사이드바 메뉴
-   ========================================================= */
-/* sticky: 스크롤해도 따라옴 */
-.sidebar {
-    flex: 0 0 260px;
+.nav-bar {
     position: sticky;
-    top: 20px;
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 16px;
+    top: 0;
+    z-index: 20;
+    background: var(--nav-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+}
+
+.nav-inner {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .nav {
+    flex: 1;
     display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.nav-label {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--muted);
-    letter-spacing: 0.08em;
-    padding: 6px 10px;
+    justify-content: flex-end;
+    gap: 4px;
 }
 
 .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 40px;
-    padding: 0 12px;
-    border-radius: 10px;
+    padding: 8px 14px;
+    border-radius: 999px;
     font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    transition: color .15s, background .15s;
 }
 
 .nav-link:hover {
-    background: var(--soft);
+    color: var(--ink);
 }
 
-/* 현재 보고 있는 섹션 (script.js가 붙임) */
+/* 지금 보고 있는 섹션 (script.js가 붙임) */
 .nav-link.active {
-    background: var(--ink);
-    color: var(--on-ink);
-    font-weight: 600;
-}
-
-.nav-text {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* 메뉴 영어 이름: 한글 옆에 작고 연하게 */
-.nav-en {
-    margin-left: 4px;
-    font-size: 12px;
-    color: var(--muted);
-}
-
-/* 선택된 메뉴(검정 배경)에서는 영어도 밝게 */
-.nav-link.active .nav-en {
-    color: var(--on-ink-muted);
-}
-
-.count {
-    font-size: 12px;
     background: var(--soft);
     color: var(--ink);
-    padding: 2px 8px;
-    border-radius: 999px;
 }
 
 /* =========================================================
-   5. 헤더: 이름 + 아이콘 버튼
+   4. 페이지 · 첫 화면
    ========================================================= */
-.header {
+.page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 24px 96px;
+}
+
+/* 왼쪽 이름 · 버튼 | 오른쪽 CURRENTLY · FOCUS */
+.hero {
+    padding: 80px 0 48px;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    align-items: end;
+    gap: 40px;
+    border-bottom: 1px solid var(--line);
+}
+
+.hero-eyebrow,
+.s-eyebrow {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+}
+
+.hero-name {
+    margin-top: 10px;
+    font-size: clamp(56px, 9vw, 96px);
+    font-weight: 800;
+    letter-spacing: -0.05em;
+    line-height: 1;
+}
+
+.hero-en {
+    margin-top: 10px;
+    font-size: clamp(15px, 1.8vw, 18px);
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+}
+
+.hero-birth {
+    margin-left: 12px;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    color: var(--muted);
+}
+
+.hero-actions {
+    margin-top: 28px;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    gap: 12px;
-    padding: 6px 4px;
+    gap: 10px;
 }
 
-.header h1 {
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-}
-
-.name-en {
-    font-family: var(--font-num);
-    font-weight: 600;
-    color: var(--muted);
-    font-size: 18px;
-}
-
-.header-actions {
+.hero-side {
     display: flex;
-    gap: 8px;
+    flex-direction: column;
+    gap: 28px;
 }
 
-/* 동그란 흰 버튼 */
-.btn-icon {
-    border: 0;
-    cursor: pointer;
-    width: 44px;
-    height: 44px;
+.hero-label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+.hero-role {
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.hero-org {
+    margin-top: 2px;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.hero-period {
+    margin-top: 6px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.focus-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.focus-tags span {
+    font-size: 13px;
+    font-weight: 700;
+    padding: 5px 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+}
+
+/* 연락 버튼 */
+.pill-btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
-    background: var(--card);
-    border-radius: 50%;
-}
-
-.btn-icon:hover {
-    background: var(--soft);
-}
-
-/* 다크 모드 스위치: 바탕(track) */
-.theme-switch {
-    position: relative;
-    width: 56px;
-    height: 32px;
-    padding: 0;
-    border: 0;
-    border-radius: 999px;
-    background: var(--soft);
-    cursor: pointer;
-    align-self: center;
-    transition: background .2s;
-}
-
-/* 라이트 모드에서는 흰 배경 위라 바탕이 잘 안 보여서 테두리 추가 */
-.theme-switch {
-    box-shadow: inset 0 0 0 1px var(--border);
-}
-
-/* 다크 모드일 때 바탕을 진하게 = "켜짐" */
-.theme-switch[aria-checked="true"] {
-    background: var(--ink);
-    box-shadow: none;
-}
-
-/* 손잡이(knob): 왼쪽 = 라이트, 오른쪽 = 다크 */
-.theme-knob {
-    position: absolute;
-    top: 4px;
-    left: 4px;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: var(--card);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, .2);
-    transition: transform .2s;
-}
-
-/* 다크 모드: 손잡이를 오른쪽으로 이동 */
-.theme-switch[aria-checked="true"] .theme-knob {
-    transform: translateX(24px);
-}
-
-/* =========================================================
-   6. 카드(섹션)와 목록 한 줄
-   ========================================================= */
-.card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 22px;
-}
-
-.card h2 {
-    font-size: 16px;
-    font-weight: 700;
-    padding-bottom: 8px;
-}
-
-/* 카드 안 작은 소제목 (자격증 > IT · 기타) */
-.sub-title {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--muted);
-    padding: 16px 0 4px;
-    margin-top: 4px;
-    border-top: 1px solid var(--line);
-}
-
-/* 제목 바로 다음의 첫 소제목은 구분선 없음 */
-.card h2+.sub-title {
-    border-top: 0;
-    padding-top: 0;
-    margin-top: 0;
-}
-
-/* 목록 한 줄: 칩 + 내용 + 오른쪽 기간 */
-.row {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 8px 14px;
-    padding: 13px 0;
-    border-bottom: 1px solid var(--line);
-    min-height: 52px;
-}
-
-/* 마지막 줄 구분선 없애기 */
-.list .row:last-child {
-    border-bottom: 0;
-}
-
-.row-main {
-    flex: 1 1 260px;
-    min-width: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.row-name {
-    font-size: 14px;
-    font-weight: 600;
-}
-
-.row-desc {
-    font-size: 12px;
-    color: var(--muted);
-}
-
-.row-side {
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
     gap: 8px;
-}
-
-/* 날짜와 버튼 사이는 조금 더 띄우기 */
-.row-side>.date,
-.row-side>.dates {
-    margin-left: 2px;
-}
-
-/* 구분 칩 (졸업 · 근무 중 · 팀 프로젝트 · 대상 등)
-   항목 맨 앞에 오고, 모든 섹션에서 같은 크기 · 같은 색 */
-.chip {
-    flex: 0 0 88px;
-    text-align: center;
-    padding: 5px 0;
-    border-radius: 6px;
-    font-size: 12px;
-    font-weight: 600;
-    background: var(--soft);
-    color: var(--badge-text);
-    white-space: nowrap;
-}
-
-/* 기간 · 날짜
-   tabular-nums: 숫자 폭을 똑같이 맞춰서 줄마다 길이가 들쭉날쭉하지 않게
-   min-width + 왼쪽 정렬: 날짜가 한 세로줄에서 시작하도록 */
-.date {
-    display: inline-block;
-    min-width: 172px;
-    text-align: left;
-    font-family: var(--font-num);
-    font-size: 12px;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    color: var(--badge-text);
-    white-space: nowrap;
-}
-
-/* 기간이 여러 개일 때 위아래로 쌓기 */
-.dates {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-/* 문서 · 상장 · 자격증 · 사이트 버튼 (날짜 왼쪽) */
-.doc-btn {
-    width: 100px;
-    min-height: 28px;
-    padding: 0 4px;
-    border: 1px solid var(--border);
+    min-height: 44px;
+    padding: 0 20px;
+    border: 1px solid var(--line);
     border-radius: 999px;
     background: var(--card);
     color: var(--ink);
     font-family: inherit;
-    font-size: 12px;
-    font-weight: 600;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
-    white-space: nowrap;
+    transition: transform .15s, box-shadow .15s;
 }
 
-/* 사이트 링크 버튼(<a>): <button>과 달리 글자가 위로 붙어서
-   가로 · 세로 가운데 정렬을 따로 지정 */
-.link-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+.pill-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow);
 }
 
-.doc-btn:hover {
-    background: var(--soft);
+.pill-primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+}
+
+.pill-primary img {
+    filter: invert(1);
 }
 
 /* =========================================================
-   7. 주소 팝업 (<dialog>)
+   5. 섹션 제목: 번호 + 큰 영어 제목 + 한글
+   ========================================================= */
+.section {
+    padding: 64px 0 0;
+}
+
+.s-head {
+    margin-bottom: 28px;
+}
+
+.s-title {
+    margin-top: 6px;
+    font-size: clamp(28px, 4vw, 38px);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+.s-sub {
+    margin-top: 4px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* 배지 (공공기관 · 실무 · 공모전 · 학교) */
+.badge {
+    flex: 0 0 auto;
+    font-size: 11px;
+    font-weight: 800;
+    padding: 3px 9px;
+    border-radius: 6px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    white-space: nowrap;
+}
+
+/* =========================================================
+   6. 상세 카드 (경력 · 프로젝트): 왼쪽 세로줄 + 점 + 카드
+   ========================================================= */
+.t-list {
+    position: relative;
+    padding-left: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.t-list::before {
+    content: "";
+    position: absolute;
+    left: 5px;
+    top: 12px;
+    bottom: 12px;
+    width: 2px;
+    background: var(--line);
+}
+
+.t-item {
+    position: relative;
+}
+
+.t-dot {
+    position: absolute;
+    left: -28px;
+    top: 32px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 3px solid var(--accent);
+}
+
+/* 카드: 흰 면 + 얇은 테두리 + 왼쪽 굵은 포인트 테두리 */
+.pr-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 26px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.pr-head {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.pr-name {
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+}
+
+.pr-sub {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.pr-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 14px;
+}
+
+.pr-date {
+    font-size: 13px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.ic-sm {
+    vertical-align: -2px;
+    margin-right: 6px;
+    opacity: .6;
+}
+
+/* 사이트 링크 · 문서 버튼 */
+.link-btn {
+    display: inline-flex;
+    align-items: center;
+    background: var(--card);
+    color: var(--ink);
+    font-family: inherit;
+    cursor: pointer;
+    min-height: 28px;
+    padding: 0 12px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    transition: background .15s;
+}
+
+.link-btn:hover {
+    background: var(--soft);
+}
+
+/* 소제목: 주요 성과 · 사용 기술 */
+.pr-block {
+    margin-top: 14px;
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.pr-points {
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.pr-points li::marker {
+    color: var(--accent);
+}
+
+.pr-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.pr-tags span {
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: var(--soft);
+    color: var(--ink);
+}
+
+/* =========================================================
+   7. More: 그 밖의 이력을 한 줄씩 짧게
+   ========================================================= */
+.m-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px 48px;
+}
+
+/* 교육 · 수상 · 자격증은 2칸 전체 폭 */
+.m-wide {
+    grid-column: 1 / -1;
+}
+
+.m-title {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--ink);
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.m-count {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.m-list {
+    list-style: none;
+    padding: 0;
+}
+
+/* 자격증 안의 작은 분류 이름 (IT · 기타) */
+.m-label {
+    margin-top: 20px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+}
+
+.m-title+.m-label {
+    margin-top: 14px;
+}
+
+/* 한 줄: 이름 · 설명 | 날짜 */
+.m-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--line);
+}
+
+.m-name {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.m-sub {
+    margin-top: 2px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+.m-date {
+    flex: 0 0 auto;
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+/* =========================================================
+   8. 팝업 (주소 · 문서 미리보기)
    ========================================================= */
 .popup {
     width: min(360px, calc(100% - 32px));
     border: 0;
-    border-radius: var(--radius);
     padding: 0;
+    border-radius: var(--radius);
     background: var(--card);
     color: var(--ink);
     font-family: var(--font);
-    box-shadow: 0 20px 50px var(--shadow);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .2);
 }
 
-/* 안쪽 여백 (바깥 클릭 판정과 분리) */
+.popup::backdrop {
+    background: rgba(0, 0, 0, .35);
+}
+
 .popup-inner {
     padding: 24px;
 }
 
-/* 팝업 뒤 어두운 배경 */
-.popup::backdrop {
-    background: rgba(18, 18, 18, .35);
-}
-
 .popup-title {
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--muted);
     margin-bottom: 8px;
 }
 
-/* 클릭하면 주소 전체 선택 */
 .popup-value {
-    font-family: var(--font-num);
     font-size: 16px;
     font-weight: 700;
     padding: 14px;
     background: var(--soft);
-    border-radius: 10px;
+    border-radius: 12px;
     word-break: break-all;
     user-select: all;
 }
@@ -495,41 +554,48 @@ ul {
     color: var(--ink);
     font-family: inherit;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+}
+
+/* 바로가기 링크도 버튼과 같은 모양 */
+a.popup-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-btn[hidden] {
+    display: none;
 }
 
 .popup-btn-dark {
     background: var(--ink);
-    color: var(--on-ink);
+    color: var(--bg);
 }
 
-/* =========================================================
-   8. 문서 미리보기 팝업 (<dialog>)
-   ========================================================= */
+/* 문서 미리보기 팝업 */
 .doc-popup {
     width: min(960px, calc(100% - 32px));
     height: min(88vh, 900px);
     border: 0;
-    border-radius: var(--radius);
     padding: 0;
+    border-radius: var(--radius);
     background: var(--card);
     color: var(--ink);
     font-family: var(--font);
-    box-shadow: 0 20px 50px var(--shadow);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, .2);
 }
 
-/* 열렸을 때만 세로 배치 (닫혀 있을 땐 숨김 유지) */
+.doc-popup::backdrop {
+    background: rgba(0, 0, 0, .35);
+}
+
 .doc-popup[open] {
     display: flex;
     flex-direction: column;
 }
 
-.doc-popup::backdrop {
-    background: rgba(18, 18, 18, .35);
-}
-
-/* 위쪽: 제목 + 닫기 */
 .doc-head {
     display: flex;
     justify-content: space-between;
@@ -548,7 +614,6 @@ ul {
     padding: 0 18px;
 }
 
-/* 문서 탭 줄 */
 .doc-tabs {
     display: flex;
     gap: 6px;
@@ -566,17 +631,15 @@ ul {
     color: var(--ink);
     font-family: inherit;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
 }
 
-/* 지금 보고 있는 문서 탭 */
 .doc-tab.active {
     background: var(--ink);
-    color: var(--on-ink);
+    color: var(--bg);
 }
 
-/* PDF가 보이는 영역 (남는 높이를 모두 차지) */
 .doc-frame {
     flex: 1;
     width: 100%;
@@ -585,123 +648,65 @@ ul {
     background: var(--soft);
 }
 
-/* 아래쪽: 새 탭에서 크게 보기 */
 .doc-open {
     padding: 12px 20px;
     font-size: 13px;
-    font-weight: 600;
+    font-weight: 700;
     text-align: center;
     border-top: 1px solid var(--line);
 }
 
-.doc-open:hover {
-    background: var(--soft);
-}
-
-.footer {
-    text-align: center;
-    font-size: 12px;
-    color: var(--muted);
-    padding: 16px 0 8px;
-}
-
 /* =========================================================
-   9. 모바일 (화면 폭 860px 이하)
-   사이드바를 상단 가로 메뉴로 바꿉니다.
+   9. 반응형
    ========================================================= */
+/* 태블릿 */
 @media (max-width: 860px) {
-    .layout {
-        flex-direction: column;
-        align-items: stretch;
-        /* 본문이 화면 폭을 넘지 않게 가로로 꽉 채우기 */
-        padding: 12px;
-        gap: 12px;
-    }
-
-    .sidebar {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        width: 100%;
-        flex: none;
-        padding: 8px;
-        border-radius: 14px;
-        box-shadow: 0 4px 16px rgba(0, 0, 0, .06);
-    }
-
-    /* 한 줄 가로 스크롤 메뉴
-      스크롤하면 script.js가 지금 보는 섹션 메뉴를 자동으로 가운데로 옮겨줍니다 */
-    .nav {
-        flex-direction: row;
-        overflow-x: auto;
-        gap: 4px;
-        scrollbar-width: none;
-    }
-
-    .nav::-webkit-scrollbar {
-        display: none;
-    }
-
-    /* 라벨 · 숫자 · 영어 이름 숨김 */
-    .nav-label, .count, .nav-en {
-        display: none;
-    }
-
-    .nav-link {
-        flex: 0 0 auto;
-    }
-
-    .nav-text {
-        overflow: visible;
-    }
-
-    /* 상단 메뉴에 제목이 가려지지 않게 */
-    html {
-        scroll-padding-top: 76px;
-    }
-
-    .header h1 {
-        font-size: 22px;
-    }
-
-    .card {
-        padding: 18px;
-    }
-
-    /* 항목 한 줄을 2칸 격자로:
-      [칩] [이름 · 설명]
-           [문서 버튼 · 기간]  ← 설명 바로 아래 */
-    .row {
-        display: grid;
-        grid-template-columns: 76px minmax(0, 1fr);
-        /* minmax(0, 1fr): 내용이 길어도 칸이 화면 밖으로 늘어나지 않게 */
-        column-gap: 12px;
-        row-gap: 4px;
+    .hero {
+        grid-template-columns: 1fr;
         align-items: start;
+        gap: 32px;
     }
 
-    .chip {
-        width: 76px;
-        font-size: 11px;
+    .m-grid {
+        grid-template-columns: 1fr;
     }
 
-    .row-side {
-        grid-column: 2;
-        margin-left: 0;
-        display: flex;
-        /* 모바일은 빈 버튼 자리 없이 버튼 · 날짜를 앞에서부터 */
-        align-items: center;
-        flex-wrap: wrap;
-        /* 좁은 화면에서는 버튼과 날짜가 두 줄로 내려가도록 */
-        gap: 6px 10px;
+    .pr-card {
+        padding: 20px;
+    }
+}
+
+/* 휴대폰 */
+@media (max-width: 520px) {
+    .nav {
+        justify-content: flex-start;
     }
 
-    .date {
-        min-width: 0;
-        color: var(--muted);
+    .nav-inner {
+        padding: 10px 14px;
+        gap: 10px;
     }
 
-    /* 문서 팝업은 화면 가득 */
+    .page {
+        padding: 0 16px 64px;
+    }
+
+    .hero {
+        padding: 48px 0 32px;
+    }
+
+    .t-list {
+        padding-left: 22px;
+    }
+
+    .t-dot {
+        left: -22px;
+    }
+
+    .t-list::before {
+        left: 4px;
+    }
+
     .doc-popup {
         width: 100%;
         height: 100%;
