@@ -396,6 +396,15 @@ a {
     font-weight: 800;
 }
 
+/* 주요 성과 안의 작은 묶음 이름 (해커톤 · 리팩터링) */
+.pr-label {
+    margin-top: 6px;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+}
+
 .pr-points {
     padding-left: 18px;
     display: flex;
